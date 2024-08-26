@@ -1,0 +1,16 @@
+@import url(./reset.css);
+@import url(./branding.css);
+@import url(./form.css);
+@import url(./style-en-uk.css);
+
+
+:root {
+  --outlineColor: #0773fd;
+  --FontColor: #fff;
+  --rowColor: #000;
+  --cellColor: #0773fd;
+}
+*{
+  box-sizing: border-box;
+}
+

@@ -1,0 +1,92 @@
+.row {
+  display: flex;
+  justify-content: flex-start;
+  align-items: stretch;
+  flex-wrap: nowrap;
+}
+.cell {
+
+  flex-grow: 1;
+  flex-basis: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.c3 {
+  flex-basis: 30%;
+}
+.c3 + * {
+  flex-basis: 70%;
+}
+.c7 {
+  flex-basis: 70%;
+}
+.c7 + * {
+  flex-basis: 30%;
+}
+
+[f-direction*="f-row"] {
+  flex-direction: row;
+}
+[f-direction*="f-row-reverse"] {
+  flex-direction:row-reverse;
+}
+[f-direction*="f-column"] {
+  flex-direction:column;
+}
+[f-direction*="f-column-reverse"] {
+  flex-direction:column-reverse;
+}
+
+[f-justify*="f-start"] {
+  justify-content:flex-start;
+}
+[f-justify*="f-end"] {
+  justify-content:flex-end;
+}
+[f-justify*="f-space"] {
+  justify-content:space-between;
+}
+[f-justify*="f-spacearound"] {
+  justify-content:space-around;
+}
+[f-justify*="f-center"] {
+  justify-content:center;
+}
+
+[f-align*="f-a-start"] {
+  align-items:flex-start;
+}
+[f-align*="f-a-end"] {
+  align-items:flex-end;
+}
+[f-align*="f-streach"] {
+  align-items:stretch;
+}
+[f-align*="f-a-center"] {
+  align-items:center;
+}
+
+
+@media only screen and (max-width: 450px) {
+  html body [rcss*="l-450"] {
+    flex-direction: column;
+  }
+}
+
+@media only screen and (max-width: 850px) {
+  html body [rcss*="l-850"] {
+    flex-direction: column;
+  }
+}
+
+@media only screen and (max-width: 1050px) {
+  html body [rcss*="l-1050"] {
+    flex-direction: column;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  html body [rcss*="l-1200"] {
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,79 @@
+@import url(./reset.css);
+@import url(./branding.css);
+@import url(./form.css);
+@import url(./style-en-uk.css);
+
+:root {
+  --outlineColor: #a81838;
+  --FontColor: #ffffff;
+  --rowColor: #000;
+  --cellColor: #779200;
+}
+
+#base {}
+
+.anonymous-page {
+  display: flex;
+  min-height: 100vh;
+}
+
+.anonymous-page>section {
+  width: 50%;
+  padding: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.action-items {
+  background: #f8f8f8;
+}
+
+.branding {
+  text-align: center;
+}
+
+.logo {
+  background-image: var(--color_Logo_URL);
+  width: 200px;
+  height: 51px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: 0 0;
+  display: block;
+  margin: 20px auto;
+}
+
+@media only screen and (max-width: 700px) {
+  .anonymous-page {
+    flex-direction: column;
+    background: #f8f8f8;
+  }
+
+  .branding {
+    background: #fff;
+  }
+
+  .logo {
+    width: 150px;
+    height: 38px;
+  }
+
+  .anonymous-page>section {
+    width: 100%;
+    padding: 20px;
+  }
+
+  .anonymous-page>section {
+    align-items: normal;
+  }
+}
+
+.action-items .row {
+  width: 100%;
+  max-width: 350px;
+}
+.action-items p{
+  text-align: center;
+}
