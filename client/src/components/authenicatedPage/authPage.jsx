@@ -1,9 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./authpage.css"; 
+import { useNavigate } from "react-router-dom";
 
 const AuthPage = () => {
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    let token = localStorage.getItem("token");
+
+    console.log("token",token)
+    if (!token) {
+      console.log(token)
+      navigate("/");
+    }
+  }, []);
+  
   return (
-    <div className="authpage-page">
+    <div className="Anonymous-page">
       <section className="branding">
         <div className="logo"></div>
         <h3>Anonymous Page</h3>
