@@ -64,32 +64,3 @@ export const login = async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 };
-
-export const logout = async (req, res) => {
-  try {
-    const token = req.headers.authorization.split(" ")[1];
-    // Decode the token
-    const decoded = jwt.decode(token);
-    // Access the ID from the decoded payload
-    const engineerId = decoded.id;
-    console.log(engineerId);
-    // Find the document with the engineerId
-    let revokedTokenDoc = await JWT_Token.findOne({ engineerId: engineerId });
-    if (!revokedTokenDoc) {
-      // If document doesn't exist, create a new one
-      revokedTokenDoc = await JWT_Token.create({
-        engineerId: engineerId,
-        revokedTokens: [token],
-      });
-    } else {
-      // Update the existing document by pushing the token to the revokedTokens array
-      revokedTokenDoc.revokedTokens.push(token);
-      await revokedTokenDoc.save();
-    }
-    // console.log(revokedTokenDoc);
-    res.status(200).json({ msg: "Logged out successfully." });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Internal server error" });
-  }
-};

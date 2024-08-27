@@ -1,9 +1,6 @@
-// src/validations.js
 
-// Email validation regex
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-// Name validation regex (letters and spaces only)
 const nameRegex = /^[A-Za-z\s]+$/;
 
 export const validateEmail = (email) => {
