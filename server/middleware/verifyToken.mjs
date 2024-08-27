@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 
 
 export const verifyToken = async (req, res, next) => {
-  console.log("reqest",req)
+ 
   try {
     const token = req.headers.authorization;
 
@@ -15,8 +15,6 @@ export const verifyToken = async (req, res, next) => {
       
       try {
         const verified = jwt.verify(extractedToken, process.env.JWT_SECRET);
-
-        console.log("Token verified");
 
         req.user = verified;
         next();
