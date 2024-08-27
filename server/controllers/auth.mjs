@@ -66,7 +66,6 @@ export const login = async (req, res) => {
 };
 
 export const logout = async (req, res) => {
-  console.log("<<<<<<<>Logout<<<<<>>>>>>");
   try {
     const token = req.headers.authorization.split(" ")[1];
     // Decode the token

@@ -1,26 +1,45 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./authpage.css"; 
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const AuthPage = () => {
-
+  const [userName, setUserName] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
-    let token = localStorage.getItem("token");
+    const token = localStorage.getItem("token");
 
-    console.log("token",token)
     if (!token) {
-      console.log(token)
       navigate("/");
+      return;
     }
-  }, []);
-  
+
+    // Decode token to extract user ID
+    const decodedToken = JSON.parse(atob(token.split('.')[1]));
+    const userId = decodedToken.id;
+
+
+    // Fetch user data
+    axios.get(`http://localhost:9002/user/${userId}`, {
+      headers: {
+        Authorization: `Bearer ${JSON.parse(token)}`
+      }
+    })
+    .then(response => {
+      setUserName(response.data.name); // Adjust according to your response structure
+    })
+    .catch(error => {
+      console.error("Error fetching user data", error);
+    });
+  }, [navigate]);
+
   return (
     <div className="Anonymous-page">
       <section className="branding">
         <div className="logo"></div>
-        <h3>Authenicted Page</h3>
+        <h2>Authenticated Page</h2>
+        <h3>Welcome to Softlets MR/Ms <span style={{color:"blue"}}>{ userName }</span></h3>
         <h3>Discover Seamless Collaboration</h3>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -31,40 +50,6 @@ const AuthPage = () => {
           pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
           culpa qui officia deserunt mollit anim id est laborum.
         </p>
-      </section>
-      <section className="action-items" id="base">
-        <h2>Heading 2</h2>
-        <p>
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua."
-        </p>
-        <label className="input-text">
-          <span>
-            Field Name <em className="asterisk">*</em>
-          </span>
-          <div>
-            <input type="text" placeholder="Place holder text" />
-          </div>
-          <div className="error">Field error sample text</div>
-        </label>
-        <label className="input-text">
-          <span>
-            Field Name <em className="asterisk">*</em>
-          </span>
-          <div>
-            <input type="text" placeholder="Place holder text" />
-          </div>
-          <div className="error">Field error sample text</div>
-        </label>
-        <label className="checkbox">
-          <div>
-            <input type="checkbox" />
-            <i></i> <span>Checkbox text value</span>
-          </div>
-          <div className="error">Field error sample text</div>
-        </label>
-        <button className="button primary">Button text</button>
-        <button className="button">Button text</button>
       </section>
     </div>
   );

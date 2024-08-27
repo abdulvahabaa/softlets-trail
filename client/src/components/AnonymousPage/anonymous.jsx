@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./anonymous.css";
+import { validateEmail, validatePassword, validateName } from "./validations";
 
 const AnonymousPage = () => {
   const [email, setEmail] = useState("");
@@ -15,96 +16,46 @@ const AnonymousPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    let token = localStorage.getItem("token");
+    const token = localStorage.getItem("token");
     if (token) {
       navigate("/auth");
     }
   }, [navigate]);
 
-  // Email validation regex
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-  // Name validation regex (letters and spaces only)
-  const nameRegex = /^[A-Za-z\s]+$/;
-
-  // Validate email
-  const validateEmail = (email) => {
-    if (!email) {
-      setEmailError("Email is required.");
-      return false;
-    } else if (!emailRegex.test(email)) {
-      setEmailError("Please enter a valid email address.");
-      return false;
-    }
-    setEmailError("");
-    return true;
-  };
-
-  // Validate password
-  const validatePassword = (password) => {
-    if (!password) {
-      setPasswordError("Password is required.");
-      return false;
-    } else if (password.length < 6) {
-      setPasswordError("Password must be at least 6 characters long.");
-      return false;
-    }
-    setPasswordError("");
-    return true;
-  };
-
-  // Validate name
-  const validateName = (name) => {
-    if (isSignup) {
-      if (!name) {
-        setNameError("Name is required.");
-        return false;
-      } else if (!nameRegex.test(name)) {
-        setNameError("Name should contain only letters and spaces.");
-        return false;
-      } else if (name.length < 2) {
-        setNameError("Name must be at least 2 characters long.");
-        return false;
-      }
-      setNameError("");
-      return true;
-    }
-    setNameError("");
-    return true;
-  };
-
-  // Handle input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     switch (name) {
       case "email":
         setEmail(value);
-        validateEmail(value);
+        setEmailError(validateEmail(value));
         break;
       case "password":
         setPassword(value);
-        validatePassword(value);
+        setPasswordError(validatePassword(value));
         break;
       case "name":
         setName(value);
-        validateName(value);
+        setNameError(validateName(value));
         break;
       default:
         break;
     }
   };
 
-  // Validation before form submission
   const validateForm = () => {
     const validEmail = validateEmail(email);
     const validPassword = validatePassword(password);
     const validName = validateName(name);
-    return validEmail && validPassword && validName;
+    setEmailError(validEmail);
+    setPasswordError(validPassword);
+    setNameError(validName);
+    return !validEmail && !validPassword && !validName;
   };
 
   const handleLogin = async (e) => {
+    alert("handle login cliked");
     e.preventDefault();
-    if (!validateForm()) return; // Validate before submitting
+    // if (!validateForm()) return;
 
     try {
       const response = await axios.post("http://localhost:9002/auth/login", {
@@ -125,7 +76,7 @@ const AnonymousPage = () => {
 
   const handleSignup = async (e) => {
     e.preventDefault();
-    if (!validateForm()) return; // Validate before submitting
+    if (!validateForm()) return;
 
     try {
       const response = await axios.post("http://localhost:9002/auth/signup", {
@@ -136,8 +87,9 @@ const AnonymousPage = () => {
       console.log("Signup successful", response.data);
 
       if (response.status === 201) {
-        localStorage.setItem("token", JSON.stringify(response.data.token));
-        navigate("/"); // Navigate to the root page after successful signup
+        setIsSignup(false);
+        setPassword("")
+
       }
     } catch (error) {
       console.error("Signup failed", error);
