@@ -4,6 +4,7 @@ import pool from "../connection/db.mjs";
 import { v7 as uuidv7 } from "uuid";
 
 export const signup = async (req, res) => {
+  console.log("request startHeare>>>",req)
   try {
     const { name, email, password } = req.body;
 

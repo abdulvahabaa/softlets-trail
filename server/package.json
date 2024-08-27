@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "main": "sever.js",
   "scripts": {
-    "devStart": "nodemon --verbose --config nodemon.json server.mjs",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "devStart": "nodemon --verbose --config nodemon.json server.mjs"
   },
   "keywords": [],
   "author": "",
@@ -21,5 +20,9 @@
     "nodemon": "^3.1.4",
     "pg": "^8.12.0",
     "uuid": "^10.0.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.46.1",
+    "@types/node": "^22.5.0"
   }
 }
