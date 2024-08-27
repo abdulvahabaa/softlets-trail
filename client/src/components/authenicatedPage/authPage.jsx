@@ -15,19 +15,18 @@ const AuthPage = () => {
       return;
     }
 
-    // Decode token to extract user ID
+
     const decodedToken = JSON.parse(atob(token.split(".")[1]));
     const userId = decodedToken.id;
 
-    // Fetch user data
     axios
       .get(`http://localhost:9002/user/${userId}`, {
         headers: {
-          Authorization: `Bearer ${token}`, // Correct token usage
+          Authorization: `Bearer ${token}`,
         },
       })
       .then((response) => {
-        setUserName(response.data.name); // Adjust according to your response structure
+        setUserName(response.data.name); 
       })
       .catch((error) => {
         console.error("Error fetching user data", error);
@@ -35,8 +34,8 @@ const AuthPage = () => {
   }, [navigate]);
 
   const handleLogout = () => {
-    localStorage.removeItem("token"); // Clear the token from local storage
-    navigate("/"); // Navigate to the home page
+    localStorage.removeItem("token"); 
+    navigate("/");
   };
 
   return (

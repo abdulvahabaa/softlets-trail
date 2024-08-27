@@ -53,9 +53,7 @@ const AnonymousPage = () => {
   };
 
   const handleLogin = async (e) => {
-    alert("handle login cliked");
     e.preventDefault();
-    // if (!validateForm()) return;
 
     try {
       const response = await axios.post("http://localhost:9002/auth/login", {
@@ -99,7 +97,7 @@ const AnonymousPage = () => {
 
   const toggleForm = () => {
     setIsSignup((prevIsSignup) => !prevIsSignup);
-    setError(""); // Clear any error messages when toggling forms
+    setError(""); 
     setEmailError("");
     setPasswordError("");
     setNameError("");
