@@ -20,7 +20,7 @@ const AuthPage = () => {
     <div className="Anonymous-page">
       <section className="branding">
         <div className="logo"></div>
-        <h3>Anonymous Page</h3>
+        <h3>Authenicted Page</h3>
         <h3>Discover Seamless Collaboration</h3>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
