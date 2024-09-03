@@ -1,7 +1,7 @@
-@import url(./reset.css);
-@import url(./branding.css);
-@import url(./form.css);
-@import url(./style-en-uk.css);
+@import url(../../CSS/reset.css);
+@import url(../../CSS/branding.css);
+@import url(../../CSS/form.css);
+/* @import url(../../CSS/style-en-uk.css); */
 
 :root {
   --outlineColor: #a81838;
